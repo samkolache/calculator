@@ -63,30 +63,70 @@ addButton.onclick = () =>
 
 subButton.onclick = () =>
 {
-    firstNum = currentNum;
-    currentNum = ""
-    operand = "sub"
+    if(test === 0) {
+        firstNum = currentNum * 1
+        test = 1;
+        currentNum = ""
+        operand = "sub"
+    }else {
+        let adjusted = currentNum * 1;
+        let newSum = subtract(firstNum, adjusted);
+        runningTotal += newSum;
+        display.innerText = runningTotal;
+        currentNum = "";
+        firstNum = "";
+        test = 0;
+    }
 }
 
 multiButton.onclick = () =>
 {
-    firstNum = currentNum;
-    currentNum = ""
-    operand = "multi"
+    if(test === 0) {
+        firstNum = currentNum * 1
+        test = 1;
+        currentNum = ""
+        operand = "multi"
+    }else {
+        let adjusted = currentNum * 1;
+        let newSum = multiply(firstNum, adjusted);
+        runningTotal += newSum;
+        display.innerText = runningTotal;
+        currentNum = "";
+        firstNum = "";
+        test = 0;
+    }
 }
 
 diviButton.onclick = () =>
 {
-    firstNum = currentNum;
-    currentNum = ""
-    operand = "divi"
+    if(test === 0) {
+        firstNum = currentNum * 1
+        test = 1;
+        currentNum = ""
+        operand = "divi"
+    }else {
+        let adjusted = currentNum * 1;
+        let newSum = divide(firstNum, adjusted);
+        runningTotal += newSum;
+        display.innerText = runningTotal;
+        currentNum = "";
+        firstNum = "";
+        test = 0;
+    }
 }
 
 equalButton.onclick = () =>
 {
-    secondNum = currentNum * 1;
-    currentNum = "";
-    doMath(runningTotal, secondNum);
+    if(runningTotal) {
+        secondNum = currentNum * 1;
+        currentNum = "";
+        doMath(runningTotal, secondNum);
+    }else {
+        secondNum = currentNum * 1;
+        currentNum = "";
+        doMath(firstNum, secondNum);
+    }
+    
 }
 
 
@@ -106,6 +146,7 @@ oneButton.addEventListener("click", event => {
 
 twoButton.addEventListener("click", event => {
     currentNum += "2"
+    console.log(2);
     display.innerText = currentNum;
 })
 
