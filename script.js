@@ -1,9 +1,9 @@
 let currentNum = ""
 let firstNum = ""
 let secondNum = ""
-let operand = "";
-let answer = "";
 let test = 0;
+let runningTotal = 0;
+let operand = "";
 const zeroButton = document.getElementById("0")
 const oneButton = document.getElementById("1")
 const twoButton = document.getElementById("2")
@@ -26,17 +26,17 @@ const display = document.getElementById("display")
 //main function
 function doMath(num1, num2) {
     if(operand === "add") {
-        answer = add(num1, num2);
-        display.innerText = answer;
+        runningTotal = add(num1,num2);
+        display.innerText = runningTotal;
     }else if(operand === "sub") {
-        answer = subtract(num1,num2);
-        display.innerText = answer;
+        runningTotal = subtract(num1,num2);
+        display.innerText = runningTotal;
     }else if(operand === "multi") {
-        answer = multiply(num1, num2)
-        display.innerText = answer;
+        runningTotal = multiply(num1, num2)
+        display.innerText = runningTotal;
     }else if(operand === "divi") {
-        answer = divide(num1, num2);
-        display.innerText = answer;
+        runningTotal = divide(num1, num2);
+        display.innerText = runningTotal;
     }
 }
 
@@ -46,33 +46,38 @@ function doMath(num1, num2) {
 addButton.onclick = () =>
 {
     if(test === 0) {
-        firstNum = currentNum * 1;
-        currentNum = ""
+        firstNum = currentNum * 1
         test = 1;
+        currentNum = ""
         operand = "add"
     }else {
-        console.log("hello")
+        let adjusted = currentNum * 1;
+        let newSum = add(firstNum, adjusted);
+        runningTotal += newSum;
+        display.innerText = runningTotal;
+        currentNum = "";
+        firstNum = "";
+        test = 0;
     }
-    
 }
 
 subButton.onclick = () =>
 {
-    firstNum = currentNum * 1;
+    firstNum = currentNum;
     currentNum = ""
     operand = "sub"
 }
 
 multiButton.onclick = () =>
 {
-    firstNum = currentNum * 1;
+    firstNum = currentNum;
     currentNum = ""
     operand = "multi"
 }
 
 diviButton.onclick = () =>
 {
-    firstNum = currentNum * 1;
+    firstNum = currentNum;
     currentNum = ""
     operand = "divi"
 }
@@ -80,8 +85,8 @@ diviButton.onclick = () =>
 equalButton.onclick = () =>
 {
     secondNum = currentNum * 1;
-    currentNum = ""
-    doMath(firstNum, secondNum);
+    currentNum = "";
+    doMath(runningTotal, secondNum);
 }
 
 
@@ -94,7 +99,7 @@ zeroButton.addEventListener("click", event => {
    
 })
 oneButton.addEventListener("click", event => {
-    currentNum += "1" 
+    currentNum += "1"
     display.innerText = currentNum;
    
 })
@@ -103,8 +108,6 @@ twoButton.addEventListener("click", event => {
     currentNum += "2"
     display.innerText = currentNum;
 })
-
-
 
 threeButton.addEventListener("click", event => {
     currentNum += "3"
@@ -117,8 +120,6 @@ dot.addEventListener("click", event => {
     display.innerText = currentNum;
 
 })
-
-
 
 fourButton.addEventListener("click", event => {
     currentNum += "4"
@@ -145,7 +146,7 @@ sevenButton.addEventListener("click", event => {
 })
 
 eightButton.addEventListener("click", event => {
-    currentNum += "8"
+    currentNum += "8" 
     display.innerText = currentNum;
 
 })
@@ -197,6 +198,7 @@ function clearAll() {
     secondNum = ""
     operand = ""
     test = 0;
+    runningTotal = 0;
     display.innerHTML = 0;
 }
 
