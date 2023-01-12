@@ -38,7 +38,7 @@ html {
 }
 
 
-.screen-outline > :nth-child(2) {
+.screen-outline > :first-child {
     margin-bottom: 5px;
     margin-right: 15px;
     font-size: 40px;

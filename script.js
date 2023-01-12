@@ -1,138 +1,114 @@
-let currentNum = ""
-let firstNum = ""
-let secondNum = ""
-let test = 0;
-let runningTotal = 0;
-let operand = "";
-const zeroButton = document.getElementById("0")
-const oneButton = document.getElementById("1")
-const twoButton = document.getElementById("2")
-const threeButton = document.getElementById("3")
-const dot = document.getElementById("dot")
-const fourButton = document.getElementById("4")
-const fiveButton = document.getElementById("5")
-const sixButton = document.getElementById("6")
-const sevenButton = document.getElementById("7")
-const eightButton = document.getElementById("8")
-const nineButton = document.getElementById("9")
-const addButton = document.getElementById("add");
-const subButton = document.getElementById("sub");
+//button creations
+let display = document.getElementById("display");
+
+const sevenButton = document.getElementById("7");
+const fourButton = document.getElementById("4");
+const oneButton = document.getElementById("1");
+const clear = document.getElementById("clear");
+const eightButton = document.getElementById("8");
+const fiveButton = document.getElementById("5");
+const twoButton = document.getElementById("2");
+const zeroButton = document.getElementById("0");
+const nineButton = document.getElementById("9");
+const sixButton = document.getElementById("6");
+const threeButton = document.getElementById("3");
+const dot = document.getElementById("dot");
+
+const plusOrMinus = document.getElementById("val");
 const multiButton = document.getElementById("multi");
+const subButton = document.getElementById("sub");
+const addButton = document.getElementById("add");
+const remove = document.getElementById("delete");
 const diviButton = document.getElementById("divi");
 const equalButton = document.getElementById("equal");
-const clear = document.getElementById("clear");
-const display = document.getElementById("display")
 
-//main function
-function doMath(num1, num2) {
-    if(operand === "add") {
-        runningTotal = add(num1,num2);
+let currentNum = "";
+let firstNum = "";
+let secondNum = "";
+let adjValue = "";
+let newSum = ""
+let runningTotal = 0;
+let count = 0;
+let operand = "";
+
+function operate(oper, num1, num2) {
+    if(oper === "add") {
+        newSum = add(num1, num2)
+        runningTotal = newSum;
         display.innerText = runningTotal;
-    }else if(operand === "sub") {
-        runningTotal = subtract(num1,num2);
+        count++
+    }else if(oper === "sub") {
+        newSum = subtract(num1, num2);
+        runningTotal = newSum;
         display.innerText = runningTotal;
-    }else if(operand === "multi") {
-        runningTotal = multiply(num1, num2)
+        count++
+    }else if(oper === "multi") {
+        runningTotal += multiply(num1, num2)
         display.innerText = runningTotal;
-    }else if(operand === "divi") {
-        runningTotal = divide(num1, num2);
+    }else if(oper === "divi") {
+        runningTotal += divide(num1, num2);
         display.innerText = runningTotal;
     }
 }
 
-
-
-//opearnd buttons
-addButton.onclick = () =>
-{
-    if(test === 0) {
-        firstNum = currentNum * 1
-        test = 1;
-        currentNum = ""
-        operand = "add"
-    }else {
-        let adjusted = currentNum * 1;
-        let newSum = add(firstNum, adjusted);
-        runningTotal += newSum;
-        display.innerText = runningTotal;
+addButton.addEventListener("click", event => {
+    if(count === 0) {
+        firstNum = currentNum * 1;
         currentNum = "";
-        firstNum = "";
-        test = 0;
-    }
-}
-
-subButton.onclick = () =>
-{
-    if(test === 0) {
-        firstNum = currentNum * 1
-        test = 1;
+        count++;
+    }else if(count === 1) {
+        adjValue = currentNum * 1;
+        runningTotal += add(adjValue, firstNum);
+        display.innerText = runningTotal;
+        adjValue = "";
         currentNum = ""
+        firstNum = ""
+        count++;
+    }else if(count > 1) {
+       adjValue = currentNum * 1;
+       runningTotal += adjValue;
+       display.innerText = runningTotal;
+        currentNum = "";
+        adjValue = "";
+        count++
+    }
+    operand = "add";
+})
+
+subButton.addEventListener("click", event => {
+    if(count === 0) {
+        firstNum = currentNum * 1;
+        currentNum = "";
         operand = "sub"
-    }else {
-        let adjusted = currentNum * 1;
-        let newSum = subtract(firstNum, adjusted);
-        runningTotal += newSum;
+        count++
+    }else if(count === 1) {
+        adjValue = currentNum *1
+        runningTotal = subtract(firstNum, adjValue)
         display.innerText = runningTotal;
-        currentNum = "";
-        firstNum = "";
-        test = 0;
-    }
-}
-
-multiButton.onclick = () =>
-{
-    if(test === 0) {
-        firstNum = currentNum * 1
-        test = 1;
+        adjValue = "";
         currentNum = ""
-        operand = "multi"
-    }else {
-        let adjusted = currentNum * 1;
-        let newSum = multiply(firstNum, adjusted);
-        runningTotal += newSum;
-        display.innerText = runningTotal;
-        currentNum = "";
-        firstNum = "";
-        test = 0;
+        firstNum = ""
+        count++;
     }
-}
+    })
+    
 
-diviButton.onclick = () =>
-{
-    if(test === 0) {
-        firstNum = currentNum * 1
-        test = 1;
+equalButton.addEventListener("click", event => {
+    if(count === 1) {
+        secondNum = currentNum * 1
         currentNum = ""
-        operand = "divi"
-    }else {
-        let adjusted = currentNum * 1;
-        let newSum = divide(firstNum, adjusted);
-        runningTotal += newSum;
-        display.innerText = runningTotal;
-        currentNum = "";
-        firstNum = "";
-        test = 0;
-    }
-}
-
-equalButton.onclick = () =>
-{
-    if(runningTotal) {
-        secondNum = currentNum * 1;
-        currentNum = "";
-        doMath(runningTotal, secondNum);
-    }else {
-        secondNum = currentNum * 1;
-        currentNum = "";
-        doMath(firstNum, secondNum);
+        operate(operand, firstNum, secondNum);
+    }else if(count > 1) {
+        secondNum = currentNum * 1
+        currentNum = ""
+        operate(operand, runningTotal, secondNum)
     }
     
-}
+})
 
 
 
 //number buttons
-
 zeroButton.addEventListener("click", event => {
     currentNum += "0"
     display.innerText = currentNum;
@@ -146,7 +122,6 @@ oneButton.addEventListener("click", event => {
 
 twoButton.addEventListener("click", event => {
     currentNum += "2"
-    console.log(2);
     display.innerText = currentNum;
 })
 
@@ -203,15 +178,6 @@ clear.addEventListener("click", event => {
 })
 
 
-
-
-
-
-
-
-
-
-
 //created all math functions
 function add(num1, num2) {
     return num1 + num2;
@@ -221,26 +187,21 @@ function subtract(num1, num2) {
     return num1 - num2;
 }
 
+function multiply(num1, num2) {
+    return num1 * num2
+}
+
 function divide(num1, num2) {
     let ans =  num1 / num2;
     return Math.round(ans * 10) / 10
 }
 
-function multiply(num1, num2) {
-    return num1 * num2
-}
-
-function negativeNumber(num) {
-    return -num;
-}
-
 function clearAll() {
-    currentNum = ""
-    secondNum = ""
-    operand = ""
-    test = 0;
-    runningTotal = 0;
-    display.innerHTML = 0;
+     currentNum = "";
+     firstNum = "";
+     secondNum = "";
+     runningTotal = 0;
+     count = 0;
+    operand = "";
+    display.innerText = 0;
 }
-
-
