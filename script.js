@@ -43,8 +43,10 @@ function operate(oper, num1, num2) {
         display.innerText = runningTotal;
         count++
     }else if(oper === "multi") {
-        runningTotal += multiply(num1, num2)
+        newSum = multiply(num1, num2);
+        runningTotal = newSum;
         display.innerText = runningTotal;
+        count++
     }else if(oper === "divi") {
         runningTotal += divide(num1, num2);
         display.innerText = runningTotal;
@@ -95,6 +97,52 @@ addButton.addEventListener("click", event => {
        
     }
     operand = "add";
+})
+
+multiButton.addEventListener("click", event => {
+    if(count === 0) {
+        firstNum = currentNum * 1;
+        currentNum = "";
+        count++
+    }else if(count === 1) {
+        if(operand === "add") {
+            adjValue = currentNum * 1;
+            runningTotal += add(adjValue, firstNum);
+            display.innerText = runningTotal;
+            adjValue = "";
+            currentNum = ""
+            firstNum = ""
+            count++;
+        }if(operand !== "add") {
+            adjValue = currentNum *1
+            runningTotal = multiply(firstNum, adjValue)
+            display.innerText = runningTotal;
+            adjValue = "";
+            currentNum = ""
+            firstNum = ""
+            count++;
+        }
+        
+    }else if(count > 1) {
+        if(operand === "add") {
+            adjValue = currentNum * 1
+            runningTotal = runningTotal + adjValue;
+            adjValue = "";
+            currentNum = "";
+            operand = "";
+            count++
+            display.innerText = runningTotal;
+        }else if(operand !== "add") {
+            adjValue = currentNum *1
+            runningTotal *= adjValue;
+            display.innerText = runningTotal;
+            currentNum = "";
+            adjValue = "";
+            count++
+        }
+        
+    }
+    operand = "multi";
 })
 
 subButton.addEventListener("click", event => {
