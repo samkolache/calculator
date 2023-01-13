@@ -39,21 +39,25 @@ function operate(oper, num1, num2) {
         runningTotal = newSum;
         display.innerText = runningTotal;
         count++
+        operand = ""
     }else if(oper === "sub") {
         newSum = subtract(num1, num2);
         runningTotal = newSum;
         display.innerText = runningTotal;
         count++
+        operand = ""
     }else if(oper === "multi") {
         newSum = multiply(num1, num2);
         runningTotal = newSum;
         display.innerText = runningTotal;
         count++
+        operand = ""
     }else if(oper === "divi") {
         newSum = divide(num1, num2);
         runningTotal = newSum;
         display.innerText = runningTotal;
         count++
+        operand = ""
     }
 }
 
@@ -477,7 +481,8 @@ function subtract(num1, num2) {
 }
 
 function multiply(num1, num2) {
-    return num1 * num2
+    let ans =  num1 * num2;
+    return Math.round(ans * 10) / 10
 }
 
 function divide(num1, num2) {
@@ -493,4 +498,8 @@ function clearAll() {
      count = 0;
     operand = "";
     display.innerText = 0;
+}
+
+function backSpace() {
+
 }
