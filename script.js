@@ -57,20 +57,42 @@ addButton.addEventListener("click", event => {
         currentNum = "";
         count++;
     }else if(count === 1) {
-        adjValue = currentNum * 1;
-        runningTotal += add(adjValue, firstNum);
-        display.innerText = runningTotal;
-        adjValue = "";
-        currentNum = ""
-        firstNum = ""
-        count++;
+        if(operand === "sub") {
+            adjValue = currentNum * 1;
+            runningTotal -= subtract(adjValue, firstNum);
+            display.innerText = runningTotal;
+            adjValue = "";
+            currentNum = ""
+            firstNum = ""
+            count++;
+        }else if(operand !== "sub") {
+            adjValue = currentNum * 1;
+            runningTotal += add(adjValue, firstNum);
+            display.innerText = runningTotal;
+            adjValue = "";
+            currentNum = ""
+            firstNum = ""
+            count++;
+        }
+        
     }else if(count > 1) {
-       adjValue = currentNum * 1;
-       runningTotal += adjValue;
-       display.innerText = runningTotal;
-        currentNum = "";
-        adjValue = "";
-        count++
+        if(operand === "sub") {
+            adjValue = currentNum * 1
+            runningTotal = runningTotal - adjValue;
+            adjValue = "";
+            currentNum = "";
+            operand = "";
+            count++
+            display.innerText = runningTotal;
+        }else if(operand !== "sub") {
+            adjValue = currentNum * 1;
+            runningTotal += adjValue;
+            display.innerText = runningTotal;
+             currentNum = "";
+             adjValue = "";
+             count++
+        }
+       
     }
     operand = "add";
 })
@@ -79,18 +101,46 @@ subButton.addEventListener("click", event => {
     if(count === 0) {
         firstNum = currentNum * 1;
         currentNum = "";
-        operand = "sub"
         count++
     }else if(count === 1) {
-        adjValue = currentNum *1
-        runningTotal = subtract(firstNum, adjValue)
-        display.innerText = runningTotal;
-        adjValue = "";
-        currentNum = ""
-        firstNum = ""
-        count++;
+        if(operand === "add") {
+            adjValue = currentNum * 1;
+            runningTotal += add(adjValue, firstNum);
+            display.innerText = runningTotal;
+            adjValue = "";
+            currentNum = ""
+            firstNum = ""
+            count++;
+        }else if(operand !== "add") {
+            adjValue = currentNum *1
+            runningTotal = subtract(firstNum, adjValue)
+            display.innerText = runningTotal;
+            adjValue = "";
+            currentNum = ""
+            firstNum = ""
+            count++;
+        }
+        
+    }else if(count > 1) {
+        if(operand === "add") {
+            adjValue = currentNum * 1
+            runningTotal = runningTotal + adjValue;
+            adjValue = "";
+            currentNum = "";
+            operand = "";
+            count++
+            display.innerText = runningTotal;
+        }else if(operand !== "add") {
+            adjValue = currentNum *1
+            runningTotal -= adjValue;
+            display.innerText = runningTotal;
+            currentNum = "";
+            adjValue = "";
+            count++
+        } 
     }
-    })
+    operand = "sub"
+})
     
 
 equalButton.addEventListener("click", event => {
