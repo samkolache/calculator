@@ -145,6 +145,7 @@ addButton.addEventListener("click", event => {
 })
 
 multiButton.addEventListener("click", event => {
+    console.log(count)
     if(count === 0) {
         firstNum = currentNum * 1;
         currentNum = "";
@@ -214,7 +215,7 @@ multiButton.addEventListener("click", event => {
             display.innerText = runningTotal;
         }else if(operand !== "add") {
             adjValue = currentNum *1
-            runningTotal *= adjValue;
+            runningTotal += adjValue;
             display.innerText = runningTotal;
             currentNum = "";
             adjValue = "";
@@ -293,7 +294,7 @@ diviButton.addEventListener("click", event => {
             display.innerText = runningTotal;
         } else if(operand !== "add") {
             adjValue = currentNum *1
-            runningTotal /= adjValue;
+            runningTotal += adjValue;
             display.innerText = runningTotal;
             currentNum = "";
             adjValue = "";
@@ -326,7 +327,7 @@ subButton.addEventListener("click", event => {
             currentNum = ""
             firstNum = ""
             count++;
-        }else if(operand = "divi") {
+        }else if(operand === "divi") {
             adjValue = currentNum * 1;
             runningTotal += divide(firstNum, adjValue);
             display.innerText = runningTotal;
@@ -343,7 +344,6 @@ subButton.addEventListener("click", event => {
             firstNum = ""
             count++;
         }
-        
         
         
     }else if(count > 1) {
