@@ -514,7 +514,3 @@ function clearAll() {
     operand = "";
     display.innerText = 0;
 }
-
-function backSpace() {
-
-}
