@@ -213,9 +213,16 @@ multiButton.addEventListener("click", event => {
             operand = "";
             count++
             display.innerText = runningTotal;
-        }else if(operand !== "add") {
+        }else if(operand === "") {
             adjValue = currentNum *1
             runningTotal += adjValue;
+            display.innerText = runningTotal;
+            currentNum = "";
+            adjValue = "";
+            count++
+        }else if(operand === "multi") {
+            adjValue = currentNum *1
+            runningTotal *= adjValue;
             display.innerText = runningTotal;
             currentNum = "";
             adjValue = "";
@@ -292,9 +299,16 @@ diviButton.addEventListener("click", event => {
             operand = "";
             count++
             display.innerText = runningTotal;
-        } else if(operand !== "add") {
+        } else if(operand === "") {
             adjValue = currentNum *1
             runningTotal += adjValue;
+            display.innerText = runningTotal;
+            currentNum = "";
+            adjValue = "";
+            count++
+        }else if(operand === "divi") {
+            adjValue = currentNum *1
+            runningTotal /= adjValue;
             display.innerText = runningTotal;
             currentNum = "";
             adjValue = "";
@@ -302,6 +316,7 @@ diviButton.addEventListener("click", event => {
         }
        
     }
+    console.log(operand)
     operand = "divi"
 })
 
