@@ -1,12 +1,25 @@
-The final project for the Odin Project Foundation project. Before starting the Odin project, I thought building a calculator would be simple. I challenged myself by only using what I learned and not to use any obvious google searches, example "how to chain functions in javascript". I can most definitely make the code in the JS simpler, but that is for another day. I wanted to create this project to demonstrate my improved knowledge in HTML/CSS and Javascript. I sharpned my DOM, and overall logic skills in Javascript. The functions of the calculator are below
+# Calculator
 
-1. Each number clicked shows on the display, clicking an additional number creates a larger number.
-2. Add, Subtract, Multiplication, and Division buttons do, well, there respected functions.
-    a. You are able to chain functions, 5 + 3 - 2 will result to 6. 
-    b. If you chain functions, hit the equal button, and continue to chain, the result will be correct. (BIG PROBLEM I HAD)
-3. A clear button, that resets all values and resets the display to 0
-4. An equal button, that stores the values made before and calculates the overall value
+## A Calculator created with HTML/CSS and JavaScript
 
-This was a very rewarding project to polish my HTML/CSS skills, especially flexbox. I will know start the second phase of the Odin project and learn how to make my code simpler.
+I built a calculator as part of my Front End development studies through the Odin Project. This project proved to be the most challenging for me as the logic wasn't making sense at first. But I was able to refine my DOM skills and enhance my problem-solving abilities. The biggest challenge I faced was combining multiple operations (e.g. 8 + 4 * 3 - 4). Overall, this project helped me to improve the following skills.
 
--Sameer
+**CSS**
+
+* Flexbox to create the layout of the calculator
+
+**JavaScript**
+* Functions to perform all operations
+* DOM manipulation to change the number on the screen
+* DOM methods and events to calculate answers when user clicks buttons
+* Logic to string multiple operands 
+
+Link to site: https://samkolache.github.io/calculator/
+
+### User Instructions
+    1. User loads onto the page and can start their calculation
+    2. User can continue operations until a final result is achieved
+    3. A clear button can be pressed to start the operations over again
+
+#### Disclaimer
+The "Positive or Negative" and "Back" buttons do not work on the calculator. I plan on adding this function soon.
